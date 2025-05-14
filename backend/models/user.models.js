@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userName: {
+    email: {
         type: String,
         required: true,
         unique: true,
@@ -15,20 +15,43 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 8,
-        maxLength: 20,
+        minLength: 8
     },
     gender: {
         type: String,
         required: true,
         enum: ["male", "female", "other"],
     },
-    profilePic:{
+    profilePic: {
         type: String,
         default: "",
-    }
+    },
+    verifyOtp: {
+        type: String,
+        default: "",
+    },
+    verifyOtpExpireAt: {
+        type: Number,
+        default: 0,
+    },
+    isAccountVerified: {
+        type: Boolean,
+        default: false,
+    },
+    resetOtp: {
+        type: String,
+        default: "",
+    },
+    resetOtpExpireAt: {
+        type: Number,
+        default: 0,
+    },
+    tokenVersion: {
+        type: Number,
+        default: 0
+    },
     // createdAt , updatedAt => Member since <createdAt>
-}, { timestamps: true, });  
+}, { timestamps: true, });
 
 // collection
 const User = mongoose.model("User", userSchema);

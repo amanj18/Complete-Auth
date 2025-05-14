@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.models.js";
 
 
-const protectRoute = async(req, res, next) => {
+const verifyToken = async(req, res, next) => {
 
     try {
         const token = req.cookies.jwt; // Extract token from cookies
@@ -16,8 +16,8 @@ const protectRoute = async(req, res, next) => {
         }
 
         const user = await User.findById(decoded.userId).select("-password"); // Fetch user details without password
-        if (!user) {
-            return res.status(401).json({ error: "Unauthorized - User not found" });
+        if (!user || decoded.tokenVersion !== user.tokenVersion) {
+            return res.status(401).json({ message: "Session expired. Please log in again." });
         }
         req.user = user; // Attach the user info to the request object
         next(); // Proceed to the next middleware or route handler
@@ -28,5 +28,5 @@ const protectRoute = async(req, res, next) => {
     }
 }
 
-export default protectRoute;
+export default verifyToken;
 // This middleware checks if the JWT token is valid and attaches the user info to the request object.

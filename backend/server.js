@@ -1,5 +1,7 @@
-import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config({ path: './.env' });
+
+import express from 'express';
 import cookieParser from 'cookie-parser';
 
 import { connectToDB } from './db/connect.js';
@@ -8,7 +10,6 @@ import authRoutes from './routes/auth.routes.js';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-dotenv.config();
 
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
