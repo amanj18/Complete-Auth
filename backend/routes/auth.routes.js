@@ -14,9 +14,9 @@ router.post('/logout-all', verifyToken, logoutAll); // Logout all sessions route
 
 router.post('/send-verify-otp',verifyToken, sendVerifyOtp); // Send verification OTP route
 
-router.post('/verify-otp', verifyToken, verifyEmail); // Verify OTP route
+router.post('/verify-account', verifyToken, verifyEmail); // Verify OTP route
 
-router.post('/is-auth', verifyToken, isAuthenticated); // Check if user is authenticated
+router.get('/is-auth', verifyToken, isAuthenticated); // Check if user is authenticated
 
 router.post('/send-resetPassword-otp', sendPasswordResetOtp); // Send password reset OTP route
 

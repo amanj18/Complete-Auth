@@ -52,7 +52,8 @@ export const signup = async (req, res) => {
                 _id: newUser._id,
                 email: newUser.email,
                 fullName: newUser.fullName,
-                profilePic: newUser.profilePic
+                profilePic: newUser.profilePic,
+                success: true,
             })
             console.log("User created successfully");
         }
@@ -83,7 +84,8 @@ export const login = async (req, res) => {
             _id: user._id,
             email: user.email,
             fullName: user.fullName,
-            profilePic: user.profilePic
+            profilePic: user.profilePic,
+            success: true,
         });
         console.log("User logged in successfully");
     }
@@ -101,7 +103,7 @@ export const logout = async (req, res) => {
             maxAge: 0,
         });
 
-        res.status(200).json({ message: "Logout successful" });
+        res.status(200).json({ message: "Logout successful" , success: true });
         console.log("User logged out successfully");
 
     } catch (error) {
@@ -165,7 +167,7 @@ export const sendVerifyOtp = async (req, res) => {
       return res.status(500).json({ message: "Failed to send OTP email" });
     }
 
-    res.status(200).json({ message: "OTP sent successfully" });
+    res.status(200).json({ message: "OTP sent successfully", success: true });
     console.log("Verification OTP sent successfully");
 
   } catch (error) {
@@ -207,7 +209,7 @@ export const verifyEmail = async (req, res) => {
 
     await user.save();
 
-    res.status(200).json({ message: "Account verified successfully" });
+    res.status(200).json({ message: "Account verified successfully", success: true });
     console.log("User account verified");
   } catch (error) {
     console.error("Error in verifyEmail:", error);
@@ -228,6 +230,7 @@ export const isAuthenticated = (req, res) => {
       fullName: user.fullName,
       profilePic: user.profilePic,
       isAccountVerified: user.isAccountVerified,
+      success: true,
     });
     console.log("User is authenticated");
 
