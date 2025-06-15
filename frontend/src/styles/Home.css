@@ -1,0 +1,15 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body & Page Container */
+body, html {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background: #083547;
+  position: relative;
+}
