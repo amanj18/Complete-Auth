@@ -19,7 +19,6 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try{
-        axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
         const { data } = await axios.post(`${backendUrl}/api/auth/logout`);
         if (data.success) {
             setIsLoggedIn(false);
@@ -33,7 +32,6 @@ const Navbar = () => {
 
   const handleVerifyOtp = async () => {
     try{
-        axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
         const { data } = await axios.post(`${backendUrl}/api/auth/send-verify-otp`);
         if (data.success) {
             toast.success(data.message || "Verification email sent");

@@ -5,7 +5,6 @@ import { AppContent } from '../context/AppContext';
 
 const Header = () => {
     const {userData} = useContext(AppContent);
-    console.log("User Data in Header:", userData);
   return (
     <header className="header">
       <h1 className="header__title">

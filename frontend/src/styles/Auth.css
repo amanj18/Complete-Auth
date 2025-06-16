@@ -148,3 +148,49 @@
     padding: 0.7rem;
   }
 }
+
+.auth__error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin: -0.5rem 0 0.75rem 0.25rem;
+  text-align: left;
+}
+/* Password Strength Meter Group Container */
+.password-meter-group {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Bar container: holds 3 horizontal segments */
+.password-meter__segments {
+  display: flex;
+  gap: 0.3rem;
+  height: 6px;
+  border-radius: 4px;
+  background-color: rgb(255 255 255 / 0%);
+}
+
+/* Individual bar segment */
+.password-meter__bar {
+  flex: 1;
+  border-radius: 4px;
+  background-color: #ccc;
+  transition: background-color 0.3s ease;
+}
+
+/* Label under the bars */
+.password-meter__label {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #ddd;
+}
+
+.auth__toggle-password {
+  margin-left: auto;
+  color: #ddd;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  font-size: 1.1rem;
+}

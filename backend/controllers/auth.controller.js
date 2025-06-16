@@ -274,7 +274,7 @@ export const sendPasswordResetOtp = async (req, res) => {
       return res.status(500).json({ message: "Failed to send OTP email" });
     }
 
-    res.status(200).json({ message: "OTP sent successfully" });
+    res.status(200).json({ message: "OTP sent successfully" , success: true });
     console.log("✅ Password reset OTP sent successfully");
 
   } catch (error) {
@@ -320,7 +320,7 @@ export const resetPassword = async (req, res) => {
 
     await user.save();
 
-    res.status(200).json({ message: "Password reset successfully" });
+    res.status(200).json({ message: "Password reset successfully" , success: true });
     console.log("✅ User password reset successfully");
 
   } catch (error) {
