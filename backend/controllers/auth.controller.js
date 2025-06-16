@@ -5,7 +5,7 @@ import { createMailOptions, sendEmail } from "../utils/mailer.js";
 
 export const signup = async (req, res) => {
     try {
-        const { password, confirmPassword, email, fullName, gender } = req.body;
+        const { password, confirmPassword, email, fullName } = req.body;
 
         if (password !== confirmPassword) { // Check if passwords match
             return res.status(400).json({ message: "passwords do not match" })
@@ -27,8 +27,9 @@ export const signup = async (req, res) => {
             email,
             fullName,
             password: hashedPassword, // Store hashed password
-            gender,
-            profilePic: gender === "male" ? boyProfilePic : girlProfilePic
+            // gender,
+            profilePic: boyProfilePic,
+            // profilePic: gender === "male" ? boyProfilePic : girlProfilePic
         });
 
         if (newUser) {

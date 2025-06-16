@@ -41,8 +41,9 @@ export const resetPasswordSchema = yup.object().shape({
 });
 
 export const signupSchema = yup.object().shape({
-  name: yup.string().required("Full name is required"),
+  fullName: yup.string().required("Full name is required"),
   email: yup.string().email("Invalid email format").required("Email is required"),
+  // gender: yup.string().required("Gender is required"),
   password: yup
     .string()
     .required("Password is required")

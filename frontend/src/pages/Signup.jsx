@@ -29,17 +29,25 @@ const Signup = () => {
   } = useForm({
     resolver: yupResolver(signupSchema),
     defaultValues: {
-      name: "",
+      fullName: "",
       email: "",
       password: "",
+      confirmPassword: "",
+      // gender: "",
     },
   });
 
   const passwordValue = watch("password");
 
-  const onSubmit = async ({ name, email, password }) => {
+  const onSubmit = async ({ fullName, email, password, confirmPassword }) => {
     try {
-      const { data } = await signupUser(backendUrl, { name, email, password });
+      const { data } = await signupUser(backendUrl, {
+        fullName,
+        email,
+        password,
+        confirmPassword,
+        // gender,
+      });
       if (data.success) {
         setIsLoggedIn(true);
         await getUserData();
@@ -66,8 +74,8 @@ const Signup = () => {
               icon={FaUser}
               type="text"
               placeholder="Full Name"
-              registerProps={register("name")}
-              error={errors.name?.message}
+              registerProps={register("fullName")}
+              error={errors.fullName?.message}
             />
 
             <AuthInput
@@ -96,6 +104,42 @@ const Signup = () => {
               error={errors.confirmPassword?.message}
             />
 
+            {/* <div className="auth__field auth__field--radio-group">
+              <label className="auth__label">Gender</label>
+              <div className="auth__radio-options">
+                <label className="auth__radio-label">
+                  <input
+                    type="radio"
+                    value="male"
+                    {...register("gender")}
+                    className="auth__radio-input"
+                  />
+                  Male
+                </label>
+                <label className="auth__radio-label">
+                  <input
+                    type="radio"
+                    value="female"
+                    {...register("gender")}
+                    className="auth__radio-input"
+                  />
+                  Female
+                </label>
+                <label className="auth__radio-label">
+                  <input
+                    type="radio"
+                    value="other"
+                    {...register("gender")}
+                    className="auth__radio-input"
+                  />
+                  Other
+                </label>
+              </div>
+              {errors.gender && (
+                <p className="auth__error">{errors.gender.message}</p>
+              )}
+            </div> */}
+
             <AuthButton text={TEXT.SIGNUP} />
 
             <p className="auth__footer">
@@ -105,7 +149,6 @@ const Signup = () => {
               </Link>
             </p>
           </form>
-          
         </div>
       </div>
     </>
