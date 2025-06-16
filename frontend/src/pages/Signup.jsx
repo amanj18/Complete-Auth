@@ -17,26 +17,25 @@ import AuthInput from "../components/AuthInput";
 import AuthButton from "../components/Button";
 import PasswordStrengthMeter from "../components/PassStrengthMeter";
 
-
 const Signup = () => {
   const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContent);
   const navigate = useNavigate();
 
-const {
-  register,
-  handleSubmit,
-  watch,
-  formState: { errors }
-} = useForm({
-  resolver: yupResolver(signupSchema),
-  defaultValues: {
-    name: "",
-    email: "",
-    password: ""
-  }
-});
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(signupSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
 
-const passwordValue = watch("password");
+  const passwordValue = watch("password");
 
   const onSubmit = async ({ name, email, password }) => {
     try {
@@ -89,6 +88,14 @@ const passwordValue = watch("password");
 
             <PasswordStrengthMeter password={passwordValue} />
 
+            <AuthInput
+              icon={FaLock}
+              type="password"
+              placeholder="Confirm Password"
+              registerProps={register("confirmPassword")}
+              error={errors.confirmPassword?.message}
+            />
+
             <AuthButton text={TEXT.SIGNUP} />
 
             <p className="auth__footer">
@@ -98,6 +105,7 @@ const passwordValue = watch("password");
               </Link>
             </p>
           </form>
+          
         </div>
       </div>
     </>

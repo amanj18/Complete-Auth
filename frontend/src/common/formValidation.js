@@ -41,16 +41,14 @@ export const resetPasswordSchema = yup.object().shape({
 });
 
 export const signupSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Full Name is required")
-    .min(3, "Name must be at least 3 characters"),
-  email: yup
-    .string()
-    .email("Invalid email format")
-    .required("Email is required"),
+  name: yup.string().required("Full name is required"),
+  email: yup.string().email("Invalid email format").required("Email is required"),
   password: yup
     .string()
     .required("Password is required")
-    .min(6, "Password must be at least 6 characters")
+    .min(6, "Password must be at least 6 characters"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords do not match")
+    .required("Please confirm your password"),
 });
