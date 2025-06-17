@@ -5,10 +5,14 @@ import { AppContent } from '../context/AppContext';
 
 const Header = () => {
     const {userData} = useContext(AppContent);
+
   return (
     <header className="header">
       <h1 className="header__title">
-        Hey {userData ? userData?.name : 'Developer'} <FaRegFaceSmileBeam className="header__icon" />
+        Hey {userData ? userData?.name : 'Developer'}
+        {userData ? (
+          <img src={userData?.profilePic} alt="User Avatar" className="header__avatar" />
+        ) : (<FaRegFaceSmileBeam className="header__icon" />)}
       </h1>
       <h2 className="header__subtitle">Welcome to our app</h2>
       <p className="header__description">

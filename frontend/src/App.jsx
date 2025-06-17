@@ -7,10 +7,15 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from "react";
+import { AppContent } from "./context/AppContext";
+import Loader from "./components/Loader";
 
 const App = () => {
+  const { loading } = useContext(AppContent);
   return (
-    <div>
+    <>
+      {loading && <Loader />}
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -19,7 +24,7 @@ const App = () => {
         <Route path="/email-verify" element={<EmailVerify />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
-    </div>
+    </>
   );
 };
 

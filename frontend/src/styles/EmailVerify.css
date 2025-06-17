@@ -50,15 +50,23 @@
   height: 50px;
   font-size: 1.4rem;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
-  background: #fff;
-  color: #333;
+  background: rgba(0, 0, 0, 0.3); /* Darker for contrast */
+  color: #fff; /* White text */
+  caret-color: #fff;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.verify__input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .verify__input:focus {
-  border-color: #007bff;
+  border-color: #66b2ff;
   outline: none;
+  background: rgba(0, 0, 0, 0.4); /* Slightly darker on focus */
+  box-shadow: none; /* Remove glow */
 }
 
 .verify__button {
@@ -90,6 +98,8 @@
     width: 36px;
     height: 46px;
     font-size: 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
   }
 
   .verify__title {

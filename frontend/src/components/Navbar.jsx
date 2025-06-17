@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "../styles/Navbar.css";
 import { FaSignInAlt, FaCheckCircle, FaSignOutAlt } from "react-icons/fa";
-import logo from "../assets/images/auth-logo.avif";
+import logo from "../assets/images/auth-logo.png";
 import { useNavigate } from "react-router-dom";
 import { AppContent } from "../context/AppContext";
 import axios from "axios";

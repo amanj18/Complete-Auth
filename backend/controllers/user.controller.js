@@ -13,6 +13,7 @@ export const getUserData = async (req, res) => {
             success: true,
             userData: {
                 name: user.fullName,
+                profilePic: user.profilePic,
                 isAccountVerified: user.isAccountVerified
             }
         });

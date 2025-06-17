@@ -1,0 +1,32 @@
+.ea-loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6); /* semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.ea-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #eee;
+  border-top: 6px solid #ff9800;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .ea-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+}

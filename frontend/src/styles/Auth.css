@@ -198,20 +198,24 @@
 .auth__field--radio-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.2rem;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .auth__label {
   font-size: 0.95rem;
   font-weight: 500;
-  margin-bottom: 0.4rem;
   color: #eee;
 }
 
 .auth__radio-options {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   gap: 1rem;
-  align-items: center;
 }
 
 .auth__radio-label {
@@ -225,7 +229,14 @@
 
 .auth__radio-input {
   accent-color: #007bff;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .auth__radio-options {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
