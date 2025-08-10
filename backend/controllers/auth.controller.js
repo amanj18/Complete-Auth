@@ -5,7 +5,7 @@ import { createMailOptions, sendEmail } from "../utils/mailer.js";
 
 export const signup = async (req, res) => {
     try {
-        const { password, confirmPassword, email, fullName, gender } = req.body;
+        const { password, confirmPassword, email, fullName } = req.body;
 
         if (password !== confirmPassword) { // Check if passwords match
             return res.status(400).json({ message: "passwords do not match" })
@@ -19,16 +19,16 @@ export const signup = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?email=${email}`;
-        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?email=${email}`;
+        // const boyProfilePic = `https://avatar.iran.liara.run/public/boy?email=${email}`;
+        // const girlProfilePic = `https://avatar.iran.liara.run/public/girl?email=${email}`;
 
         // Create new user
         const newUser = new User({
             email,
             fullName,
             password: hashedPassword, // Store hashed password
-            gender,
-            profilePic: gender === "male" ? boyProfilePic : girlProfilePic
+            // gender,
+            // profilePic: gender === "male" ? boyProfilePic : girlProfilePic
         });
 
         if (newUser) {
@@ -52,7 +52,7 @@ export const signup = async (req, res) => {
                 _id: newUser._id,
                 email: newUser.email,
                 fullName: newUser.fullName,
-                profilePic: newUser.profilePic,
+                // profilePic: newUser.profilePic,
                 success: true,
             })
             console.log("User created successfully");
@@ -84,7 +84,7 @@ export const login = async (req, res) => {
             _id: user._id,
             email: user.email,
             fullName: user.fullName,
-            profilePic: user.profilePic,
+            // profilePic: user.profilePic,
             success: true,
         });
         console.log("User logged in successfully");
@@ -228,7 +228,7 @@ export const isAuthenticated = (req, res) => {
       _id: user._id,
       email: user.email,
       fullName: user.fullName,
-      profilePic: user.profilePic,
+      // profilePic: user.profilePic,
       isAccountVerified: user.isAccountVerified,
       success: true,
     });

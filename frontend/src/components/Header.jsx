@@ -10,7 +10,7 @@ const Header = () => {
     <header className="header">
       <h1 className="header__title">
         Hey {userData ? userData?.name : 'Developer'}
-        {userData ? (
+        {userData?.profilePic ? (
           <img src={userData?.profilePic} alt="User Avatar" className="header__avatar" />
         ) : (<FaRegFaceSmileBeam className="header__icon" />)}
       </h1>

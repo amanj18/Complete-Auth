@@ -111,10 +111,10 @@ const Signup = () => {
               error={errors.confirmPassword?.message}
             />
 
-            <SelectInput
+            {/* <SelectInput
               registerProps={register("gender")}
               error={errors.gender?.message}
-            />
+            /> */}
 
             <AuthButton text={TEXT.SIGNUP} />
 
