@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-enco
 app.use(cookieParser()); // Middleware to parse cookies
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://complete-auth-jp9tdocig-amanjais160-8974s-projects.vercel.app',
+  'https://complete-auth-phi.vercel.app',
 ];
 
 app.use(cors({
