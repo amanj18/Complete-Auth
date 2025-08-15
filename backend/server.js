@@ -21,6 +21,7 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'http://localhost:5173', // Local development
+  'https://complete-auth-phi.vercel.app', // Vercel deployment
 ];
 
 app.use(express.json()); // Middleware to parse JSON bodies
@@ -31,6 +32,8 @@ app.use(cors({
   credentials: true, // Allow cookies to be sent with requests
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 }));
+
+app.options("*", cors());
 
 // AUTH ROUTES
 app.use("/api/auth", authRoutes);
