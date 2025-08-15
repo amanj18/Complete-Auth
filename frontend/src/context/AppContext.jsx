@@ -9,7 +9,7 @@ export const AppContextProvider = ({ children }) => {
   axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
 
   const backendUrl =
-    import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+    import.meta.env.VITE_API_BACKEND_URL || "http://localhost:5000";
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
