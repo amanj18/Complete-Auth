@@ -29,18 +29,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl)
-    if (!origin) return callback(null, true);
-
-    // If the origin is in our whitelist
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    // Otherwise block
-    return callback(new Error(`CORS blocked for origin: ${origin}`));
-  },
+  origin: allowedOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 }));
