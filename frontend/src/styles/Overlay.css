@@ -1,0 +1,77 @@
+/* Full screen dark transparent backdrop */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Clickable backdrop */
+.overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+/* Popup box (glass effect like auth__container) */
+.overlay__content {
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.8rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  animation: popupFadeIn 0.3s ease;
+  color: white;
+}
+
+/* Header (title + close button) */
+.overlay__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.overlay__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.overlay__close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.overlay__close:hover {
+  color: #ffcc00;
+}
+
+/* Body content */
+.overlay__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Fade-in animation */
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

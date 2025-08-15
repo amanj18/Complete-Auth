@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useContext } from "react";
 import { AppContent } from "./context/AppContext";
 import Loader from "./components/Loader";
+import Profile from './pages/Profile';
 
 const App = () => {
   const { loading } = useContext(AppContent);
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/email-verify" element={<EmailVerify />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>

@@ -240,3 +240,24 @@
     gap: 0.5rem;
   }
 }
+
+/* Column layout for label + input */
+.auth__field--column {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.auth__field--column input {
+  margin-left: 0;
+  width: 100%;
+}
+
+/* Danger (red) button */
+.auth__button--danger {
+  background-color: #e74c3c;
+}
+
+.auth__button--danger:hover {
+  background-color: #c0392b;
+}

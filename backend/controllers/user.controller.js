@@ -13,7 +13,7 @@ export const getUserData = async (req, res) => {
             success: true,
             userData: {
                 name: user.fullName,
-                // profilePic: user.profilePic,
+                profilePic: user.profilePic,
                 isAccountVerified: user.isAccountVerified
             }
         });
@@ -59,18 +59,30 @@ export const deleteAccount = async (req, res) => {
   }
 };
 
-
 // Edit profile
 export const editProfile = async (req, res) => {
   try {
-    const { fullName, gender, profilePic } = req.body;
+    const { fullName, gender } = req.body;
     const allowedGenders = ["male", "female", "other"];
 
     const updates = {};
 
+    // Update full name if provided
     if (fullName) updates.fullName = fullName;
-    if (gender && allowedGenders.includes(gender.toLowerCase())) updates.gender = gender.toLowerCase();
-    if (profilePic) updates.profilePic = profilePic;
+
+    // Gender & Profile Picture Logic
+    if (gender && allowedGenders.includes(gender.toLowerCase())) {
+      const normalizedGender = gender.toLowerCase();
+      updates.gender = normalizedGender;
+
+      if (normalizedGender === "male") {
+        updates.profilePic = `https://avatar.iran.liara.run/public/boy?email=${encodeURIComponent(fullName)}`;
+      } else if (normalizedGender === "female") {
+        updates.profilePic = `https://avatar.iran.liara.run/public/girl?email=${encodeURIComponent(fullName)}`;
+      } else {
+        updates.profilePic = `https://avatar.iran.liara.run/public/${encodeURIComponent(fullName)}`;
+      }
+    }
 
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
@@ -87,9 +99,11 @@ export const editProfile = async (req, res) => {
       message: "Profile updated successfully",
       user: updatedUser,
     });
+
     console.log(`✏️ User ${updatedUser.email} updated profile`);
   } catch (error) {
     console.error("❌ Error in editProfile:", error);
     res.status(500).send("Internal Server Error");
   }
 };
+
