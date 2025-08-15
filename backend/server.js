@@ -10,6 +10,13 @@ import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 
 const app = express();
+
+// trust proxy when behind Render/other proxies (needed for secure cookies)
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
+
 const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
@@ -22,6 +29,7 @@ app.use(cookieParser()); // Middleware to parse cookies
 app.use(cors({
   origin: allowedOrigins, // Allow requests from the frontend URL
   credentials: true, // Allow cookies to be sent with requests
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 }));
 
 // AUTH ROUTES
