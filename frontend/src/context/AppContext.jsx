@@ -18,7 +18,7 @@ export const AppContextProvider = ({ children }) => {
     setLoading(true); // ✅ show loader before fetch
     try {
       const { data } = await fetchWithLoading(
-        () => axios.get(`${backendUrl}/api/auth/is-auth`), { withCredentials: true },
+        () => axios.get(`${backendUrl}/api/auth/is-auth`,{ withCredentials: true }),
         setLoading
       );
       if (data.success) {
@@ -38,7 +38,7 @@ export const AppContextProvider = ({ children }) => {
   const getUserData = async () => {
     try {
       const { data } = await await fetchWithLoading(
-      () => axios.get(`${backendUrl}/api/user/data`), { withCredentials: true },
+      () => axios.get(`${backendUrl}/api/user/data`, { withCredentials: true }),
       setLoading
     );
       if (data.success) {
