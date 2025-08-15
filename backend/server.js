@@ -23,27 +23,31 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
 app.use(cookieParser()); // Middleware to parse cookies
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://complete-auth-phi.vercel.app',
+];
+
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
+    // Allow requests with no origin (like mobile apps or curl)
     if (!origin) return callback(null, true);
 
-    const allowedOrigins = [
-      'http://localhost:5173',
-      'https://complete-auth-phi.vercel.app',
-    ];
-
+    // If the origin is in our whitelist
     if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+      return callback(null, true);
     }
+
+    // Otherwise block
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
   },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 }));
 
-app.options("*", cors());
+// Make sure OPTIONS requests are handled globally
+app.options('*', cors());
+
 
 // AUTH ROUTES
 app.use("/api/auth", authRoutes);
