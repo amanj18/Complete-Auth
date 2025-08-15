@@ -8,8 +8,8 @@ const genTokenAndSetCookie = (userId, res, tokenVersion = 0) => {
   res.cookie("jwt", token, {
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    secure: process.env.NODE_ENV === "production"
+  secure: true,               // must be true in prod (HTTPS)
+  sameSite: "none"  
   });
 };
 
