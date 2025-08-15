@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === "production") {
 // ✅ Allow exact origins (match your deployed frontend)
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://complete-auth-phi.vercel.app',
+  'https://complete-auth-check.vercel.app',
   'https://complete-auth-jp9tdocig-amanjais160-8974s-projects.vercel.app' // add your preview build too
 ];
 
@@ -33,7 +33,7 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 }));
-
+ 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
