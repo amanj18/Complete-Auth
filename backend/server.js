@@ -45,7 +45,6 @@ app.use(cors({
 }));
 
 // Make sure OPTIONS requests are handled globally
-app.options('*', cors());
 
 
 // AUTH ROUTES
