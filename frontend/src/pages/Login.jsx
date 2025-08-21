@@ -15,6 +15,7 @@ import { loginSchema } from "../common/formValidation";
 // Reusable components
 import AuthInput from "../components/AuthInput";
 import Button from "../components/Button";
+import Navbar from "../components/Navbar.jsx";
 
 const Login = () => {
   const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContent);
@@ -49,8 +50,9 @@ const Login = () => {
   };
 
   return (
-    <>
+   <>
       <FloatAnimation />
+      <Navbar />
       <div className="auth">
         <div className="auth__container">
           <h1 className="auth__title">{TEXT.LOGIN_TITLE}</h1>

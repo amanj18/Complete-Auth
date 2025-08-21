@@ -17,6 +17,7 @@ import AuthInput from "../components/AuthInput";
 import AuthButton from "../components/Button";
 import PasswordStrengthMeter from "../components/PassStrengthMeter";
 import SelectInput from "../components/SelectInput";
+import Navbar from "../components/Navbar";
 
 const Signup = () => {
   const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContent);
@@ -71,6 +72,7 @@ const Signup = () => {
   return (
     <>
       <FloatAnimation />
+      <Navbar />
       <div className="auth">
         <div className="auth__container">
           <h1 className="auth__title">{TEXT.SIGNUP_TITLE}</h1>

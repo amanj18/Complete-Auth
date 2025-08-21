@@ -5,6 +5,8 @@ import Button from "../components/Button";
 import { AppContent } from "../context/AppContext";
 import "../styles/Auth.css"; // ✅ Reuse signup/login styles
 import "../styles/Profile.css"; // ✅ Append only extra styles if needed
+import FloatAnimation from "../components/FloatAnimation";
+import Navbar from "../components/Navbar";
 
 const Profile = () => {
   const { backendUrl, userData, getUserData } = useContext(AppContent);
@@ -48,63 +50,70 @@ const Profile = () => {
   };
 
   return (
-    <div className="auth">
-      <div className="auth__container">
-        <h1 className="auth__title">Edit Profile</h1>
+    <>
+      <FloatAnimation />
+      <Navbar />
+      <div className="auth">
+        <div className="auth__container">
+          <h1 className="auth__title">Edit Profile</h1>
 
-        <form onSubmit={handleSubmit} className="auth__form">
-          {/* Full Name */}
-          <div className="auth__field">
-            <input
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
-
-          {/* Gender */}
-          <div className="auth__field auth__field--radio-group">
-            <label className="auth__label">Gender</label>
-            <div className="auth__radio-options">
-              <label className="auth__radio-label">
-                <input
-                  type="radio"
-                  className="auth__radio-input"
-                  value="male"
-                  checked={gender === "male"}
-                  onChange={(e) => setGender(e.target.value)}
-                />
-                Male
-              </label>
-              <label className="auth__radio-label">
-                <input
-                  type="radio"
-                  className="auth__radio-input"
-                  value="female"
-                  checked={gender === "female"}
-                  onChange={(e) => setGender(e.target.value)}
-                />
-                Female
-              </label>
-              <label className="auth__radio-label">
-                <input
-                  type="radio"
-                  className="auth__radio-input"
-                  value="other"
-                  checked={gender === "other"}
-                  onChange={(e) => setGender(e.target.value)}
-                />
-                Other
-              </label>
+          <form onSubmit={handleSubmit} className="auth__form">
+            {/* Full Name */}
+            <div className="auth__field">
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Enter your full name"
+                required
+              />
             </div>
-          </div>
 
-          <Button text={loading ? "Updating..." : "Update Profile"} disabled={loading} />
-        </form>
+            {/* Gender */}
+            <div className="auth__field auth__field--radio-group">
+              <label className="auth__label">Gender</label>
+              <div className="auth__radio-options">
+                <label className="auth__radio-label">
+                  <input
+                    type="radio"
+                    className="auth__radio-input"
+                    value="male"
+                    checked={gender === "male"}
+                    onChange={(e) => setGender(e.target.value)}
+                  />
+                  Male
+                </label>
+                <label className="auth__radio-label">
+                  <input
+                    type="radio"
+                    className="auth__radio-input"
+                    value="female"
+                    checked={gender === "female"}
+                    onChange={(e) => setGender(e.target.value)}
+                  />
+                  Female
+                </label>
+                <label className="auth__radio-label">
+                  <input
+                    type="radio"
+                    className="auth__radio-input"
+                    value="other"
+                    checked={gender === "other"}
+                    onChange={(e) => setGender(e.target.value)}
+                  />
+                  Other
+                </label>
+              </div>
+            </div>
+
+            <Button
+              text={loading ? "Updating..." : "Update Profile"}
+              disabled={loading}
+            />
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

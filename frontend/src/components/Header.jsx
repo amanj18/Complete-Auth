@@ -2,9 +2,15 @@ import React, { useContext } from 'react';
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
 import '../styles/Header.css'; 
 import { AppContent } from '../context/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const {userData} = useContext(AppContent);
+    const navigate = useNavigate();
+
+    const handleChatNavigation = () => {
+      navigate('/chat');
+    }
 
   return (
     <header className="header">
@@ -18,7 +24,7 @@ const Header = () => {
       <p className="header__description">
         Discover powerful features to help you build, manage, and grow your applications with ease. Let’s get you started on something amazing!
       </p>
-      <button className="header__button">Get Started</button>
+      <button className="header__button" onClick={handleChatNavigation}>Start Chat</button>
     </header>
   );
 };

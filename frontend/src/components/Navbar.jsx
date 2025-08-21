@@ -25,7 +25,6 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-
   return (
     <nav className="navbar">
       <div className="navbar__logo">

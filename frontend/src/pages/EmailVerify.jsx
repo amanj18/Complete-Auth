@@ -13,19 +13,22 @@ import { TEXT } from "../config/constant";
 // Reusable components
 import Button from "../components/Button";
 import OtpInputGroup from "../components/OtpInput";
+import FloatAnimation from "../components/FloatAnimation";
+import Navbar from "../components/Navbar";
 
 const EmailVerify = () => {
   const navigate = useNavigate();
-  const { backendUrl, userData, getUserData, isLoggedIn } = useContext(AppContent);
+  const { backendUrl, userData, getUserData, isLoggedIn } =
+    useContext(AppContent);
 
   const {
     handleSubmit,
     control,
     setValue,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(otpSchema),
-    defaultValues: { otp: new Array(6).fill("") }
+    defaultValues: { otp: new Array(6).fill("") },
   });
 
   useEffect(() => {
@@ -51,22 +54,26 @@ const EmailVerify = () => {
   };
 
   return (
-    <div className="verify">
-      <div className="verify__container">
-        <h1 className="verify__title">{TEXT.VERIFY_EMAIL_TITLE}</h1>
-        <p className="verify__subtitle">{TEXT.VERIFY_EMAIL_SUBTITLE}</p>
+    <>
+      <FloatAnimation />
+      <Navbar />
+      <div className="verify">
+        <div className="verify__container">
+          <h1 className="verify__title">{TEXT.VERIFY_EMAIL_TITLE}</h1>
+          <p className="verify__subtitle">{TEXT.VERIFY_EMAIL_SUBTITLE}</p>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <OtpInputGroup
-            control={control}
-            setValue={setValue}
-            name="otp"
-            error={errors.otp?.message}
-          />
-          <Button text={TEXT.VERIFY_EMAIL} />
-        </form>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <OtpInputGroup
+              control={control}
+              setValue={setValue}
+              name="otp"
+              error={errors.otp?.message}
+            />
+            <Button text={TEXT.VERIFY_EMAIL} />
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -18,6 +18,8 @@ import AuthInput from "../components/AuthInput";
 import Button from "../components/Button";
 import OtpInput from "../components/OtpInput";
 import PassStrengthMeter from "../components/PassStrengthMeter";
+import FloatAnimation from "../components/FloatAnimation";
+import Navbar from "../components/Navbar";
 
 const ResetPassword = () => {
   const { backendUrl } = useContext(AppContent);
@@ -48,16 +50,16 @@ const ResetPassword = () => {
   });
 
   // Step 3 - Password
-const {
-  register: passwordRegister,
-  handleSubmit: handlePasswordSubmit,
-  formState: { errors: passwordErrors },
-  watch: watchPassword
-} = useForm({
-  resolver: yupResolver(resetPasswordSchema),
-});
+  const {
+    register: passwordRegister,
+    handleSubmit: handlePasswordSubmit,
+    formState: { errors: passwordErrors },
+    watch: watchPassword,
+  } = useForm({
+    resolver: yupResolver(resetPasswordSchema),
+  });
 
-const passwordValue = watchPassword("newPassword");
+  const passwordValue = watchPassword("newPassword");
 
   const handleSendOtp = async (data) => {
     try {
@@ -103,57 +105,61 @@ const passwordValue = watchPassword("newPassword");
   };
 
   return (
-    <div className="auth">
-      <div className="auth__container">
-        <h1 className="auth__title">{TEXT.RESET_PASSWORD_TITLE}</h1>
-        <p className="auth__subtitle">{TEXT.RESET_PASSWORD_SUBTITLE}</p>
+    <>
+      <FloatAnimation />
+      <Navbar />
+      <div className="auth">
+        <div className="auth__container">
+          <h1 className="auth__title">{TEXT.RESET_PASSWORD_TITLE}</h1>
+          <p className="auth__subtitle">{TEXT.RESET_PASSWORD_SUBTITLE}</p>
 
-        {step === 1 && (
-          <form onSubmit={handleEmailSubmit(handleSendOtp)}>
-            <AuthInput
-              type="email"
-              placeholder="Enter your email"
-              registerProps={emailRegister("email")}
-              error={emailErrors.email?.message}
-            />
-            <Button text={TEXT.SEND_OTP} />
-          </form>
-        )}
+          {step === 1 && (
+            <form onSubmit={handleEmailSubmit(handleSendOtp)}>
+              <AuthInput
+                type="email"
+                placeholder="Enter your email"
+                registerProps={emailRegister("email")}
+                error={emailErrors.email?.message}
+              />
+              <Button text={TEXT.SEND_OTP} />
+            </form>
+          )}
 
-        {step === 2 && (
-          <form onSubmit={handleOtpSubmit(handleVerifyOtp)}>
-            <OtpInput
-              control={otpControl}
-              setValue={setOtpValue}
-              name="otp"
-              error={otpErrors.otp?.message}
-            />
-            <Button text={TEXT.CONTINUE} />
-          </form>
-        )}
+          {step === 2 && (
+            <form onSubmit={handleOtpSubmit(handleVerifyOtp)}>
+              <OtpInput
+                control={otpControl}
+                setValue={setOtpValue}
+                name="otp"
+                error={otpErrors.otp?.message}
+              />
+              <Button text={TEXT.CONTINUE} />
+            </form>
+          )}
 
-        {step === 3 && (
-          <form onSubmit={handlePasswordSubmit(handleResetPassword)}>
-            <AuthInput
-              type="password"
-              placeholder="New Password"
-              registerProps={passwordRegister("newPassword")}
-              error={passwordErrors.newPassword?.message}
-            />
+          {step === 3 && (
+            <form onSubmit={handlePasswordSubmit(handleResetPassword)}>
+              <AuthInput
+                type="password"
+                placeholder="New Password"
+                registerProps={passwordRegister("newPassword")}
+                error={passwordErrors.newPassword?.message}
+              />
 
-            <PassStrengthMeter password={passwordValue} />
+              <PassStrengthMeter password={passwordValue} />
 
-            <AuthInput
-              type="password"
-              placeholder="Confirm Password"
-              registerProps={passwordRegister("confirmPassword")}
-              error={passwordErrors.confirmPassword?.message}
-            />
-            <Button text={TEXT.RESET_PASSWORD} />
-          </form>
-        )}
+              <AuthInput
+                type="password"
+                placeholder="Confirm Password"
+                registerProps={passwordRegister("confirmPassword")}
+                error={passwordErrors.confirmPassword?.message}
+              />
+              <Button text={TEXT.RESET_PASSWORD} />
+            </form>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

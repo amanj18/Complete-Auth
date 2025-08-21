@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaCheckCircle, FaSignOutAlt, FaEdit } from "react-icons/fa";
+import { FaCheckCircle, FaSignOutAlt, FaEdit, FaHome } from "react-icons/fa";
 import { RiDeleteBinFill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { IoChatboxEllipses } from "react-icons/io5";
 import { AppContent } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -16,6 +17,7 @@ const UserDropdown = ({
   setDropdownOpen,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dropdownRef = useRef(null);
 
   // Delete overlay state
@@ -96,13 +98,31 @@ const UserDropdown = ({
       </button>
       {dropdownOpen && (
         <div className="navbar__dropdown">
-          {!userData.isAccountVerified && (
+          {location.pathname !== "/" && (<button
+            className="navbar__dropdown-item"
+            onClick={() => {
+              setDropdownOpen(false);
+              navigate("/");
+            }}
+          >
+            <FaHome className="navbar__dropdown-icon" /> Home
+          </button> )}
+          {location.pathname !== "/chat" && (<button
+            className="navbar__dropdown-item"
+            onClick={() => {
+              setDropdownOpen(false);
+              navigate("/chat");
+            }}
+          >
+            <IoChatboxEllipses className="navbar__dropdown-icon" /> Message
+          </button> )}
+          {!userData.isAccountVerified && location.pathname !== "/email-verify" && (
             <button className="navbar__dropdown-item" onClick={handleVerifyOtp}>
               <FaCheckCircle className="navbar__dropdown-icon" />
               Verify Email
             </button>
           )}
-          <button
+          {location.pathname !== "/profile" && (<button
             className="navbar__dropdown-item"
             onClick={() => {
               setDropdownOpen(false);
@@ -110,7 +130,7 @@ const UserDropdown = ({
             }}
           >
             <FaEdit className="navbar__dropdown-icon" /> Edit Profile
-          </button>
+          </button> )}
           <button
             className="navbar__dropdown-item"
             onClick={() => {
