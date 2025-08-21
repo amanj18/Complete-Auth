@@ -135,9 +135,4 @@
     height: 36px;
     font-size: 0.95rem;
   }
-
-  .navbar__dropdown {
-    right: 50%;
-    transform: translateX(50%);
-  }
 }
