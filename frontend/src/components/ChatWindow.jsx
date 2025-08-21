@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { useSocket } from "../context/SocketContext";
 import { AppContent } from "../context/AppContext";
 import axios from "axios";
-import "../styles/Chat.css";
+import "../styles/Chat.css"; // ✅ new styles
 
 const ChatWindow = ({ peer }) => {
   const { backendUrl, userData } = useContext(AppContent);
@@ -11,7 +11,6 @@ const ChatWindow = ({ peer }) => {
   const [text, setText] = useState("");
   const endRef = useRef(null);
 
-  // Fetch history
   useEffect(() => {
     if (!peer) return;
     const fetchHistory = async () => {
@@ -24,11 +23,9 @@ const ChatWindow = ({ peer }) => {
     fetchHistory();
   }, [peer, backendUrl]);
 
-  // Listen for new incoming messages
   useEffect(() => {
     if (!socket) return;
     socket.on("message:new", (msg) => {
-      // ✅ Only append if it's not my own message
       if (msg.senderId !== userData._id) {
         if (msg.senderId === peer._id || msg.receiverId === peer._id) {
           setMessages((prev) => [...prev, msg]);
@@ -44,33 +41,43 @@ const ChatWindow = ({ peer }) => {
 
   const send = () => {
     if (!text.trim() || !socket) return;
-
     const newMsg = {
       senderId: userData._id,
       receiverId: peer._id,
       text,
       createdAt: new Date().toISOString(),
     };
-
-    // Add optimistically to UI
     setMessages((prev) => [...prev, newMsg]);
-
-    // Send to server
     socket.emit("message:send", { to: peer._id, text });
-
     setText("");
   };
+
   return (
     <div className="chat-window">
-      <h3 className="chat-window__title">Chat with {peer.name}</h3>
+      <h3 className="chat-window__title">Chat with {peer.fullName}</h3>
       <div className="chat-window__messages">
         {messages.map((m, i) => {
           const sender = String(m.senderId);
           const meId = String(userData._id);
+          const isMe = sender === meId;
           return (
-            <p key={i} className="chat-window__message">
-              <b>{sender === meId ? "You" : peer.fullName}:</b> {m.text}
-            </p>
+            <div
+              key={i}
+              className={
+                isMe
+                  ? "chat-window__message--me"
+                  : "chat-window__message--peer"
+              }
+            >
+              <div
+                className={
+                  isMe ? "chat-window__name--me" : "chat-window__name--peer"
+                }
+              >
+                {isMe ? "You" : peer.fullName}
+              </div>
+              <div className="chat-window__bubble">{m.text}</div>
+            </div>
           );
         })}
         <div ref={endRef} />

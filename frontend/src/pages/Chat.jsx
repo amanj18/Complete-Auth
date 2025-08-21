@@ -20,7 +20,9 @@
           {peer ? (
             <ChatWindow peer={peer} />
           ) : (
-            <p>Select a user to chat</p>
+            <p style={{ color: "white", textAlign: "center" }}>
+              Select a user to chat
+            </p>
           )}
         </div>
       </div>
