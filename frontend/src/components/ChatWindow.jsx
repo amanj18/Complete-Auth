@@ -6,7 +6,7 @@ import "../styles/Chat.css"; // ✅ new styles
 
 const ChatWindow = ({ peer }) => {
   const { backendUrl, userData } = useContext(AppContent);
-  const { socket } = useSocket();
+  const { socket, onlineUsers } = useSocket();
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
   const endRef = useRef(null);
@@ -54,7 +54,23 @@ const ChatWindow = ({ peer }) => {
 
   return (
     <div className="chat-window">
-      <h3 className="chat-window__title">Chat with {peer.fullName}</h3>
+      <div className="chat-window__header">
+        <img
+          src={peer.profilePic || "https://avatar.iran.liara.run/public/20"}
+          alt={peer.fullName}
+          className="chat-window__avatar"
+        />
+        <div className="chat-window__user-info">
+          <h3 className="chat-window__title">{peer.fullName}</h3>
+          <span
+            className={`chat-window__status ${
+              onlineUsers.includes(peer._id) ? "online" : "offline"
+            }`}
+          >
+            {onlineUsers.includes(peer._id) ? "Online" : "Offline"}
+          </span>
+        </div>
+      </div>
       <div className="chat-window__messages">
         {messages.map((m, i) => {
           const sender = String(m.senderId);
@@ -64,9 +80,7 @@ const ChatWindow = ({ peer }) => {
             <div
               key={i}
               className={
-                isMe
-                  ? "chat-window__message--me"
-                  : "chat-window__message--peer"
+                isMe ? "chat-window__message--me" : "chat-window__message--peer"
               }
             >
               <div
